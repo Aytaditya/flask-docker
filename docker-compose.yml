@@ -1,0 +1,32 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+
+
+
+# we have defined 2 services in the docker-compose.yml file.
+
+# 1. web: This service will build the Dockerfile in the current directory and run the application on port 5000.
+# 2. redis: This service will run a Redis container on the default port 6379.
+
+# The web service depends on the redis service. This means that the redis service will be started before the web service.
+
+# The REDIS_HOST environment variable is set to redis. This is the hostname of the redis service.
+
+# The ports section of the web service maps port 5000 of the host to port 5000 of the container. The ports section of the redis service maps port 6379 of the host to port 6379 of the container.
+
+# The build command in the web service tells Compose to build the image using the Dockerfile in the current directory.
+
+# The image command in the redis service tells Compose to use the official Redis image from the Docker Hub registry.
